@@ -2,9 +2,7 @@
 A stateless **RESTful** Poker **API** built with *Spring Boot* and *Spring MVC*, simulating a single hand of poker. A teaching example demonstrating **RESTful API** design, **HTTP** methods, request/response handling, **MVC** architecture, and stateless application principles.
 
 ---
-## *Spring Boot* Poker **RESTful API**
-
-### About the Project
+## About the Project
 
 This project is an educational **RESTful API** built with *Spring Boot* and *Spring MVC*, using a simplified, single-hand poker scenario to demonstrate modern backend software development.
 
