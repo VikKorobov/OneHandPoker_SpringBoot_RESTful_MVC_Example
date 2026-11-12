@@ -169,6 +169,57 @@ For the best educational experience, learners are encouraged to follow the branc
 Learners are also encouraged to create their own branches to experiment with alternative implementations without modifying the provided reference stages.
 
 ---
+## Building and Running the Application
+
+### Prerequisites
+
+The application is built and executed entirely using *Docker*. No local installation of *Java*, the *JDK*, or *Maven* is required.
+
+The only prerequisite is Docker with Docker Compose support.
+
+Docker can be downloaded from the official website:
+
+- [Download Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Docker Installation Guide](https://docs.docker.com/get-started/get-docker/)
+
+Make sure Docker is installed and running before proceeding.
+
+### Starting the Application
+
+From the project's root directory, execute:
+```bash
+docker compose up --build -d
+```
+
+This command:
+
+1. Builds the Spring Boot application inside Docker using the project's Maven Wrapper.
+2. Creates the required Docker containers.
+3. Starts the application and its *PostgreSQL* database.
+4. Runs the containers in the background.
+
+The Maven Wrapper ensures that the configured Maven version is used during the build without requiring a local Maven installation.
+
+Once started successfully, the application is accessible at: `http://localhost:8080`
+
+### *Swagger UI* — **API** Documentation
+
+The application provides interactive **REST API** documentation through *Swagger UI*.
+
+After starting the application, open the following **URL** in your browser: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+*Swagger UI* allows learners to explore the available endpoints, inspect request and response structures, and execute **API** requests directly from their browser.
+
+### Stopping the Application
+
+To stop and remove the running containers, execute:
+```bash
+docker compose down
+```
+
+This stops the application and its associated services without deleting persistent database volumes.
+
+---
 ## Technology Stack
 
 Each technology has been selected to demonstrate a specific responsibility within a modern backend development workflow.
