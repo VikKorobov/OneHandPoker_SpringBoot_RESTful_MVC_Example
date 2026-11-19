@@ -24,19 +24,19 @@ public interface IGameController {
     @GetMapping("games")
     ResponseEntity<Iterable<FullGameView>> getGames();
 
-    @GetMapping("player/{id}")
-    ResponseEntity<FullGameView> getPlayer(@PathVariable Long id);
-
-    @GetMapping("player/{id}/games")
+    @GetMapping("games/player/{id}")
     ResponseEntity<Iterable<FullGameView>> getPlayerGames(@PathVariable Long id);
 
     @GetMapping("stats")
     ResponseEntity<StatsView> getStats();
 
+    @GetMapping("stats/player/{id}")
+    ResponseEntity<FullGameView> getPlayerStats(@PathVariable Long id);
+
     //NOTE: The following two endpoints will serve static markdown files that are stored in the resources folder. 
-    @GetMapping(value = "rules", produces = "text/markdown")
+    @GetMapping(value = "info/rules", produces = "text/markdown")
     ResponseEntity<String> getRules();
 
-    @GetMapping(value = "chances", produces = "text/markdown")
+    @GetMapping(value = "info/chances", produces = "text/markdown")
     ResponseEntity<String> getChances();
 }
