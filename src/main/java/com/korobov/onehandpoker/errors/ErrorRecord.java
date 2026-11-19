@@ -21,10 +21,10 @@ import org.springframework.http.ResponseEntity;
  * @author Korobov Viktor
  * @version 1.0
  */
-public record ErrorWrapper(String message, HttpStatus status) {
+public record ErrorRecord(String message, HttpStatus status) {
 
     /**
-     * Converts this {@code ErrorWrapper} into an HTTP response.
+     * Converts this {@code ErrorRecord} into an HTTP response.
      *
      * <p>
      * The response contains the associated HTTP status code and uses
@@ -35,7 +35,7 @@ public record ErrorWrapper(String message, HttpStatus status) {
      *         and the associated HTTP status code.
      */
     public ResponseEntity<String> toResponseEntity() {
-        
+
         return ResponseEntity.status(status).body(message);
     }
 }
