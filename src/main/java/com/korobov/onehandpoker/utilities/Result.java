@@ -1,9 +1,5 @@
 package com.korobov.onehandpoker.utilities;
 
-import java.util.Optional;
-
-import com.korobov.onehandpoker.errors.ErrorWrapper;
-
 /**
  * Represents the result of an operation that can succeed or fail.
  * 
@@ -17,8 +13,6 @@ import com.korobov.onehandpoker.errors.ErrorWrapper;
  * @param <FailureType> the type of data associated with failure.
  * 
  * @see ErrorResult
- * @see ErrorWrapper
- * @see Optional
  * 
  * @author Korobov Viktor
  * @version 1.0
@@ -63,6 +57,20 @@ public class Result<SuccessType, FailureType> {
     }
 
     /**
+     * Creates a failed {@code Result} instance from an {@code ErrorResult}.
+     *
+     * @param <S>         the type of success data.
+     * @param <F>         the type of failure data.
+     * @param errorResult the failed {@code ErrorResult} containing the error data.
+     * @return a failed {@code Result} containing the error data.
+     * @throws IllegalArgumentException if {@code errorResult} represents a success.
+     */
+    public static <S, F> Result<S, F> failure(ErrorResult<F> errorResult) {
+
+        return Result.failure(errorResult.getFailureData());
+    }
+
+    /**
      * Checks if the result represents a success.
      * 
      * @return {@code true} if the result is a success, {@code false} otherwise.
@@ -94,7 +102,7 @@ public class Result<SuccessType, FailureType> {
      * Retrieves the failure data, if any.
      */
     public FailureType getFailureData() {
-        
+
         return failureData;
     }
 }
