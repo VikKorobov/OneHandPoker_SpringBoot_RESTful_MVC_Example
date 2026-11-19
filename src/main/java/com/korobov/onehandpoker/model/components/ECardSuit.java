@@ -1,4 +1,4 @@
-package com.korobov.onehandpoker.model;
+package com.korobov.onehandpoker.model.components;
 
 public enum ECardSuit {
     HEARTS,
