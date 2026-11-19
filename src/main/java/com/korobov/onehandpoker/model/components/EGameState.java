@@ -10,5 +10,6 @@ public enum EGameState {
     THREE_OF_A_KIND,
     TWO_PAIR,
     JACKS_OR_BETTER,
-    LOSE
+    LOW_PAIR,
+    HIGH_CARD
 }
