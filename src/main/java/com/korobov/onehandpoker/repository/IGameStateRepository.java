@@ -1,6 +1,6 @@
 package com.korobov.onehandpoker.repository;
 
-public interface IGameStateRepository {
-
+//TODO: extend with JPA repository when concrete model implementation is created
+public interface IGameStateRepository{
 
 }
