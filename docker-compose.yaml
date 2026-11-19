@@ -1,0 +1,47 @@
+
+# ---------- Spring Boot Application ----------
+services:
+  app:
+    # Build the application image using the local Dockerfile
+    build: .
+    container_name: demo-app
+
+    # Expose the REST API
+    ports:
+      - "8080:8080"
+
+    # Start the database container before the application
+    depends_on:
+      - db
+
+    # Configure Spring Boot and its database connection
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/demo
+      SPRING_DATASOURCE_USERNAME: demo
+      SPRING_DATASOURCE_PASSWORD: demo
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+
+  # ---------- PostgreSQL Database ----------
+  db:
+    # PostgreSQL 17 image
+    image: postgres:17
+    container_name: demo-db
+
+    # Expose PostgreSQL for external connections
+    ports:
+      - "5432:5432"
+
+    # Initialize the database and its credentials
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+
+    # Persist database data across container restarts
+    volumes:
+      - demo-db-data:/var/lib/postgresql/data
+
+# ---------- Persistent Storage ----------
+volumes:
+  demo-db-data:
