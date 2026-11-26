@@ -1,47 +1,84 @@
+name: onehandpoker
 
-# ---------- Spring Boot Application ----------
 services:
+  # ---------- Spring Boot Application ----------
   app:
     # Build the application image using the local Dockerfile
     build: .
-    container_name: demo-app
+    container_name: onehandpoker-app
 
     # Expose the REST API
     ports:
       - "8080:8080"
 
-    # Start the database container before the application
+    # Wait until the external services are ready
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      mock-bank:
+        condition: service_healthy
 
-    # Configure Spring Boot and its database connection
+    # Configure Spring Boot and its external connections
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/demo
-      SPRING_DATASOURCE_USERNAME: demo
-      SPRING_DATASOURCE_PASSWORD: demo
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/onehandpoker
+      SPRING_DATASOURCE_USERNAME: onehandpoker
+      SPRING_DATASOURCE_PASSWORD: onehandpoker
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: true
+      BANKING_SERVICE_URL: http://mock-bank:8080
 
   # ---------- PostgreSQL Database ----------
   db:
     # PostgreSQL 17 image
     image: postgres:17
-    container_name: demo-db
+    container_name: onehandpoker-db
 
-    # Expose PostgreSQL for external connections
+    # Expose PostgreSQL for local external connections
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
 
     # Initialize the database and its credentials
     environment:
-      POSTGRES_DB: demo
-      POSTGRES_USER: demo
-      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: onehandpoker
+      POSTGRES_USER: onehandpoker
+      POSTGRES_PASSWORD: onehandpoker
+
+    # Check whether PostgreSQL is ready
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U onehandpoker -d onehandpoker"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
     # Persist database data across container restarts
     volumes:
-      - demo-db-data:/var/lib/postgresql/data
+      - onehandpoker-db-data:/var/lib/postgresql/data
+
+  # ---------- Mock Banking Service ----------
+  #NOTE:
+  # WireMock is used in this example for demonstration purposes only.
+  # It simulates an external Banking microservice without implementing
+  # actual banking business logic or persistent data storage.
+  mock-bank:
+    # Standalone WireMock image
+    image: wiremock/wiremock:3.13.2
+    container_name: onehandpoker-mock-bank
+
+    # Expose WireMock for local testing
+    ports:
+      - "127.0.0.1:8081:8080"
+
+    # Mount mock endpoint definitions and response files
+    volumes:
+      - ./infrastructure/wiremock:/home/wiremock:ro
+
+    # Check whether WireMock is ready
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/__admin/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 # ---------- Persistent Storage ----------
 volumes:
-  demo-db-data:
+  onehandpoker-db-data:
