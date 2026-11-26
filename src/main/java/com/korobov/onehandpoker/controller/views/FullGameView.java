@@ -10,7 +10,7 @@ import com.korobov.onehandpoker.model.components.EGameResult;
 public record FullGameView(
         Long gameId,
         Iterable<CardRecord> playerCards,
-        EGameResult gameState,
+        EGameResult gameResult,
         BigDecimal playerBet,
         BigDecimal winMultiplier,
         BigDecimal playerWinnings
@@ -20,7 +20,7 @@ public record FullGameView(
 
         Objects.requireNonNull(gameId);
         Objects.requireNonNull(playerCards);
-        Objects.requireNonNull(gameState);
+        Objects.requireNonNull(gameResult);
         Objects.requireNonNull(playerBet);
         Objects.requireNonNull(winMultiplier);
         Objects.requireNonNull(playerWinnings);
@@ -33,7 +33,7 @@ public record FullGameView(
         return new FullGameView(
                 model.getGameId(),
                 model.getPlayerCards(),
-                model.getGameState(),
+                model.getGameResult(),
                 model.getPlayerBet(),
                 model.getWinMultiplier(),
                 model.getPlayerWinnings()

@@ -13,7 +13,7 @@ public interface IGameStateModel {
     
     Iterable<CardRecord> getPlayerCards();
 
-    EGameResult getGameState();
+    EGameResult getGameResult();
 
     BigDecimal getPlayerBet();
 
