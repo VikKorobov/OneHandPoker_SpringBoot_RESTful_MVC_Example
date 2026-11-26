@@ -59,13 +59,25 @@ public class Result<SuccessType, FailureType> {
     /**
      * Creates a failed {@code Result} instance from an {@code ErrorResult}.
      *
+     * <p>
+     * This method allows failure data to be propagated from an
+     * {@code ErrorResult} whose failure type is equal to or a subtype
+     * of the resulting failure type.
+     * </p>
+     *
      * @param <S>         the type of success data.
      * @param <F>         the type of failure data.
      * @param errorResult the failed {@code ErrorResult} containing the error data.
-     * @return a failed {@code Result} containing the error data.
+     * @return a failed {@code Result} containing the original error data.
      * @throws IllegalArgumentException if {@code errorResult} represents a success.
+     * @throws NullPointerException if {@code errorResult} is {@code null}.
      */
-    public static <S, F> Result<S, F> failure(ErrorResult<F> errorResult) {
+    public static <S, F> Result<S, F> failure(ErrorResult<? extends F> errorResult) {
+
+        if (errorResult.isSuccess()) {
+
+            throw new IllegalArgumentException("The provided ErrorResult represents a success.");
+        }
 
         return Result.failure(errorResult.getFailureData());
     }
