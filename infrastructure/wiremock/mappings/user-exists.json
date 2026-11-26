@@ -1,0 +1,10 @@
+{
+    "name": "User exists",
+    "request": {
+        "method": "GET",
+        "urlPathPattern": "/api/user/[0-9]*[02468]"
+    },
+    "response": {
+        "status": 200
+    }
+}

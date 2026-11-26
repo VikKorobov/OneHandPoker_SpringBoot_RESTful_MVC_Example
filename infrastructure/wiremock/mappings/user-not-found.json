@@ -1,0 +1,10 @@
+{
+    "name": "User does not exist",
+    "request": {
+        "method": "GET",
+        "urlPathPattern": "/api/user/[0-9]*[13579]"
+    },
+    "response": {
+        "status": 404
+    }
+}

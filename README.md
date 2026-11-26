@@ -211,7 +211,7 @@ The application environment consists of three independent services:
 | Service | Technology | Local Address |
 |---|---|---|
 | One-Hand Poker API | *Spring Boot* | `http://localhost:8080` |
-| Mock Banking API | *WireMock* | `http://localhost:8081` |
+| Mock User API | *WireMock* | `http://localhost:8081` |
 | Database | *PostgreSQL* | `localhost:5432` |
 
 The services communicate through an internal Docker network.
@@ -627,11 +627,11 @@ behavior within an application or test environment, *WireMock*
 simulates external services at the **HTTP** communication level.
 
 In this project, *WireMock* runs as an independent Docker container
-and simulates an external Banking microservice.
+and simulates an external User microservice.
 
 The mock service provides predefined responses, allowing the
 One-Hand Poker application to communicate with an external REST API
-without requiring a concrete Banking microservice implementation.
+without requiring a concrete User microservice implementation.
 
 The mock endpoint definitions and response files are located in:
 
@@ -732,12 +732,12 @@ Similarly, applying architectural principles does not guarantee that every desig
 
 The code should be examined critically, discussed, tested, and improved as part of the learning process.
 
-The external Banking microservice is intentionally simulated using
+The external User microservice is intentionally simulated using
 *WireMock* to keep the project focused on the implementation of the
 One-Hand Poker application.
 
 The simulated service is an educational infrastructure component,
-not a complete implementation of a Banking microservice.
+not a complete implementation of a User microservice.
 
 ---
 # Final Thoughts

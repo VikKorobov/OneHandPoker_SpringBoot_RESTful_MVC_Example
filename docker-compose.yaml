@@ -15,7 +15,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      mock-bank:
+      mock-user:
         condition: service_healthy
 
     # Configure Spring Boot and its external connections
@@ -25,7 +25,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: onehandpoker
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: true
-      BANKING_SERVICE_URL: http://mock-bank:8080
+      USER_SERVICE_URL: http://mock-user:8080
 
   # ---------- PostgreSQL Database ----------
   db:
@@ -54,15 +54,18 @@ services:
     volumes:
       - onehandpoker-db-data:/var/lib/postgresql/data
 
-  # ---------- Mock Banking Service ----------
+  # ---------- Mock User Service ----------
   #NOTE:
   # WireMock is used in this example for demonstration purposes only.
-  # It simulates an external Banking microservice without implementing
-  # actual banking business logic or persistent data storage.
-  mock-bank:
+  # It simulates an external User microservice without implementing
+  # actual user management, business logic, or persistent data storage.
+  #
+  # The simulated service considers even user IDs to represent
+  # existing users and odd user IDs to represent nonexistent users.
+  mock-user:
     # Standalone WireMock image
     image: wiremock/wiremock:3.13.2
-    container_name: onehandpoker-mock-bank
+    container_name: onehandpoker-mock-user
 
     # Expose WireMock for local testing
     ports:
