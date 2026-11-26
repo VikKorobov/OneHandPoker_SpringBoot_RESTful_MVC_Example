@@ -1,5 +1,7 @@
 package com.korobov.onehandpoker.utilities;
 
+import java.util.Objects;
+
 /**
  * Represents the result of an operation that may fail, with optional error
  * data.
@@ -42,10 +44,11 @@ public class ErrorResult<FailureType> {
      * @param <F>   the type of error data.
      * @param error the error data associated with the failure.
      * @return a failed {@code ErrorResult}.
+     * @throws NullPointerException if {@code error} is {@code null}.
      */
     public static <F> ErrorResult<F> failure(F error) {
 
-        return new ErrorResult<>(false, error);
+        return new ErrorResult<>(false, Objects.requireNonNull(error));
     }
 
     /**

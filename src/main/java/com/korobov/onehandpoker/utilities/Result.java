@@ -1,5 +1,7 @@
 package com.korobov.onehandpoker.utilities;
 
+import java.util.Objects;
+
 /**
  * Represents the result of an operation that can succeed or fail.
  * 
@@ -37,10 +39,11 @@ public class Result<SuccessType, FailureType> {
      * @param <F>  the type of failure data.
      * @param data the success data.
      * @return a successful {@code Result}.
+     * @throws NullPointerException if {@code error} is {@code null}.
      */
     public static <S, F> Result<S, F> success(S data) {
 
-        return new Result<>(true, data, null);
+        return new Result<>(true, Objects.requireNonNull(data), null);
     }
 
     /**
@@ -50,10 +53,11 @@ public class Result<SuccessType, FailureType> {
      * @param <F>   the type of failure data.
      * @param error the error data.
      * @return a failed {@code Result}.
+     * @throws NullPointerException if {@code error} is {@code null}.
      */
     public static <S, F> Result<S, F> failure(F error) {
 
-        return new Result<>(false, null, error);
+        return new Result<>(false, null, Objects.requireNonNull(error));
     }
 
     /**
