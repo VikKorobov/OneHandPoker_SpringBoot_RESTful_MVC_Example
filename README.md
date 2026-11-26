@@ -503,18 +503,29 @@ The important distinction is between duplicated code and duplicated knowledge.
 
 ### Testing Technologies - *JUnit* & *Mockito*
 
-*JUnit* is the primary testing framework used in the project.
+JUnit* is the primary testing framework used in this project. It provides the tools required to define and execute automated tests for Java code.
 
-It provides the tools required to define and execute automated tests for Java code.
+Testing focuses primarily on execution path coverage, verifying successful operations, expected failure scenarios, boundary conditions, and relevant domain invariants.
+
+Trivial code, such as simple constructors, getters, setters, and data transfer objects (DTOs), is not tested explicitly, as doing so provides little additional value. However, any non-trivial behavior introduced into these components should be covered.
+
+Static utility and helper methods are primarily tested indirectly through the components that use them. Since these methods often serve as internal implementation details, testing them indirectly reduces coupling between tests and implementation, allowing internal refactoring without unnecessary changes to the test suite.
+
+Static methods that constitute a component's public contract, such as static factory methods, are tested directly.
+
+The objective is to achieve meaningful behavioral coverage rather than maximize code coverage for its own sake.
 
 #### Educational purpose
 
 Students learn how to:
 
-- Write unit tests.
-- Organize test cases.
+- Write and organize unit tests.
 - Assert expected outcomes.
-- Test normal behavior and edge cases.
+- Identify and cover relevant execution paths.
+- Test normal behavior, failure scenarios, and edge cases.
+- Distinguish between direct and indirect testing.
+- Focus on meaningful behavior rather than trivial implementation details.
+- Avoid redundant tests and unnecessary coupling to implementation details.
 
 For a rule-based domain such as poker, testing is particularly valuable because expected results can often be clearly defined.
 
