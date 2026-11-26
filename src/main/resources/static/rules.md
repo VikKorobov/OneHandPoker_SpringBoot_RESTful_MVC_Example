@@ -60,4 +60,4 @@ The server, not the client, must determine the dealt cards and the payout. Use a
 - Theoretical return to player (RTP): 99.498876%
 - Theoretical house edge: 0.501124%
 
-See http://localhost:8080/casino/onehandpoker/api/chances for the exact probabilities and gambling-risk explanation.
+See http://localhost:8080/casino/onehandpoker/api/infos/chances for the exact probabilities and gambling-risk explanation.
