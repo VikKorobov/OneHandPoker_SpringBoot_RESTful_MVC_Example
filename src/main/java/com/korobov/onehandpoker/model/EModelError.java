@@ -14,16 +14,16 @@ import com.korobov.onehandpoker.utilities.IError;
  */
 public enum EModelError implements IError {
 
-    INVALID_PLAYER_ID(EErrorCode.BAD_REQUEST, "The player ID must be positive."),
+    INVALID_PLAYER_ID(EErrorCode.BAD_REQUEST, "The player ID must be greater than zero and not null."),
     INVALID_PLAYER_CARDS(EErrorCode.BAD_REQUEST, "The player must have exactly five distinct, non-null cards."),
-    DUPLICATE_PLAYER_CARDS(EErrorCode.BAD_REQUEST, "The player cards must be distinct."),
     INVALID_GAME_RESULT(EErrorCode.BAD_REQUEST, "The game result must not be null."),
-    INVALID_PLAYER_BET(EErrorCode.BAD_REQUEST, "The player bet must be positive."),
-    INVALID_WIN_MULTIPLIER(EErrorCode.BAD_REQUEST, "The win multiplier must be non-negative."),
-    INVALID_PLAYER_WINNINGS(EErrorCode.BAD_REQUEST, "The player winnings must be non-negative."),
+    INVALID_PLAYER_BET(EErrorCode.BAD_REQUEST, "The player bet must be positive and not null."),
+    INVALID_WIN_MULTIPLIER(EErrorCode.BAD_REQUEST, "The win multiplier must be non-negative and not null."),
+    INVALID_PLAYER_WINNINGS(EErrorCode.BAD_REQUEST, "The player winnings must be non-negative and not null."),
     INCONSISTENT_GAME_RESULT(EErrorCode.BAD_REQUEST, "The game result must correspond to the player cards."),
-    INCONSISTENT_PLAYER_WINNINGS(EErrorCode.BAD_REQUEST, "The player winnings must equal the player bet multiplied by the win multiplier.");
-    
+    INCONSISTENT_PLAYER_WINNINGS(EErrorCode.BAD_REQUEST, "The player winnings must equal the player bet multiplied by the win multiplier."),
+    DUPLICATE_PLAYER_CARDS(EErrorCode.BAD_REQUEST, "The player cards must be distinct.");
+  
     private final EErrorCode code;
     private final String message;
 
