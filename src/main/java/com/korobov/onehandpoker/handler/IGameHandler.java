@@ -6,7 +6,7 @@ import com.korobov.onehandpoker.model.IGameStateModel;
 
 public interface IGameHandler {
     
-    IGameStateModel play(Long playerId, BigDecimal playerBet, BigDecimal playerWinnings);
+    IGameStateModel play(Long playerId, BigDecimal playerBet);
 
     IGameStateModel getGame(Long id);
 
