@@ -1,6 +1,7 @@
 package com.korobov.onehandpoker.controller.views;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public record PlayerView(
         long playerId,
@@ -9,6 +10,13 @@ public record PlayerView(
         int lossCount,
         BigDecimal totalWinnings,
         BigDecimal totalLosses,
-        BigDecimal totalProfit) {
+        BigDecimal totalProfit
+) {
 
+    public PlayerView {
+
+        Objects.requireNonNull(totalWinnings);
+        Objects.requireNonNull(totalLosses);
+        Objects.requireNonNull(totalProfit);
+    }
 }

@@ -1,7 +1,7 @@
-
 package com.korobov.onehandpoker.controller.views;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import com.korobov.onehandpoker.model.IGameStateModel;
 import com.korobov.onehandpoker.model.components.CardRecord;
@@ -15,6 +15,16 @@ public record FullGameView(
         BigDecimal winMultiplier,
         BigDecimal playerWinnings
 ) {
+
+    public FullGameView {
+
+        Objects.requireNonNull(gameId);
+        Objects.requireNonNull(playerCards);
+        Objects.requireNonNull(gameState);
+        Objects.requireNonNull(playerBet);
+        Objects.requireNonNull(winMultiplier);
+        Objects.requireNonNull(playerWinnings);
+    }
 
     public static FullGameView of(IGameStateModel model) {
 
