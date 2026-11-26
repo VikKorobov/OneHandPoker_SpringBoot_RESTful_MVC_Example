@@ -25,6 +25,8 @@ The project covers:
 - Containerization and reproducible development environments
 - Dependency management and build automation
 - Interactive **API** documentation
+- Inter-service communication and simulation of external REST APIs
+- Architectural contracts and source code documentation using *JavaDoc*
 
 The primary goal is education, not the development of a gambling application.
 
@@ -73,6 +75,8 @@ By exploring this project, learners should gain a better understanding of how to
 11. Containerize application components using *Docker*.
 12. Manage dependencies and automate builds using *Maven*.
 13. Document and explore API endpoints using *Swagger UI*.
+14. Simulate external microservices using *WireMock* and understand
+15. service-to-service communication through **REST API**s.
 
 The project is intended to encourage learners to question architectural decisions rather than simply reproduce existing code.
 
@@ -194,11 +198,27 @@ docker compose up --build -d
 This command:
 
 1. Builds the Spring Boot application inside Docker using the project's Maven Wrapper.
-2. Creates the required Docker containers.
-3. Starts the application and its *PostgreSQL* database.
-4. Runs the containers in the background.
+2. Creates the required Docker containers and their shared network.
+3. Starts the *PostgreSQL* database and the *WireMock* service.
+4. Waits until the external services are ready.
+5. Starts the Spring Boot application.
+6. Runs the containers in the background.
 
 The Maven Wrapper ensures that the configured Maven version is used during the build without requiring a local Maven installation.
+
+The application environment consists of three independent services:
+
+| Service | Technology | Local Address |
+|---|---|---|
+| One-Hand Poker API | *Spring Boot* | `http://localhost:8080` |
+| Mock Banking API | *WireMock* | `http://localhost:8081` |
+| Database | *PostgreSQL* | `localhost:5432` |
+
+The services communicate through an internal Docker network.
+
+Application configuration, database credentials, and external service
+addresses are supplied through environment variables defined in the
+`docker-compose.yml` file.
 
 Once started successfully, the application is accessible at: `http://localhost:8080`
 
@@ -597,6 +617,78 @@ Students learn about:
 
 It also reinforces the idea that an API is a public contract, not merely a collection of controller methods.
 
+### External Service Simulation - *WireMock*
+
+*WireMock* is a tool used to simulate external **HTTP** services and
+**REST APIs**.
+
+Unlike *Mockito*, which primarily replaces Java objects and their
+behavior within an application or test environment, *WireMock*
+simulates external services at the **HTTP** communication level.
+
+In this project, *WireMock* runs as an independent Docker container
+and simulates an external Banking microservice.
+
+The mock service provides predefined responses, allowing the
+One-Hand Poker application to communicate with an external REST API
+without requiring a concrete Banking microservice implementation.
+
+The mock endpoint definitions and response files are located in:
+
+`infrastructure/wiremock/`
+
+#### Educational purpose
+
+Students learn how to:
+
+- Communicate with external REST APIs.
+- Simulate external microservices.
+- Define controlled HTTP responses.
+- Understand service-to-service communication.
+- Develop application components independently of external services.
+- Configure external service addresses through environment variables.
+
+*WireMock* also demonstrates how external dependencies can be
+simulated during development and integration testing.
+
+<ins>WireMock is used in this project for demonstration purposes only.</ins>
+
+### Source Code Documentation - *JavaDoc*
+
+*JavaDoc* is the standard documentation mechanism provided by *Java* for describing classes, interfaces, records, enumerations, constructors, and methods.
+
+In this project, *JavaDoc* serves not only as source code documentation but also as a means of describing the architectural skeleton and its intended behavior.
+
+The project skeleton defines architectural components and their contracts before providing their concrete implementations.
+
+The documentation describes:
+
+- The responsibilities of individual architectural components.
+- The intended behavior of interfaces and methods.
+- Expected input parameters and return values.
+- Preconditions, invariants, and constraints.
+- Expected error handling behavior.
+- The separation of responsibilities between architectural layers.
+
+This allows developers to understand what a component is expected to accomplish without prescribing how its internal implementation must be realized.
+
+Unnecessary duplication of documentation and comments describing self-explanatory code should be avoided.
+
+#### Educational Purpose
+
+Students learn how to:
+
+- Define architectural contracts before implementing concrete functionality.
+- Separate component responsibilities from implementation details.
+- Understand an existing project skeleton through its documentation.
+- Implement components according to predefined contracts.
+- Maintain consistent and meaningful source code documentation.
+- Use documentation as a communication mechanism between developers.
+
+*JavaDoc* complements the architectural principles of this project by making the intended design explicit and understandable.
+
+It does not replace meaningful naming, clean code, automated tests, or concrete implementations.
+
 ---
 ## How the Concepts Work Together
 
@@ -613,6 +705,7 @@ Each component has a distinct responsibility:
 - *Maven* automates builds and testing.
 - *Docker* provides reproducible runtime environments.
 - *Swagger UI* makes the API discoverable and easier to explore.
+- *WireMock* simulates external HTTP services and demonstrates service-to-service communication.
 
 **DDD** helps define boundaries between these responsibilities.
 
@@ -638,6 +731,13 @@ The project should not be interpreted as demonstrating every possible feature of
 Similarly, applying architectural principles does not guarantee that every design decision is optimal.
 
 The code should be examined critically, discussed, tested, and improved as part of the learning process.
+
+The external Banking microservice is intentionally simulated using
+*WireMock* to keep the project focused on the implementation of the
+One-Hand Poker application.
+
+The simulated service is an educational infrastructure component,
+not a complete implementation of a Banking microservice.
 
 ---
 # Final Thoughts
