@@ -23,6 +23,8 @@ public record QuickGameView(
 
     public static QuickGameView of(IGameStateModel model) {
 
+        Objects.requireNonNull(model);
+
         return new QuickGameView(
                 model.getGameId(),
                 model.getPlayerCards(),

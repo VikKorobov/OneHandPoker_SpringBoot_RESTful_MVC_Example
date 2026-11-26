@@ -28,6 +28,8 @@ public record FullGameView(
 
     public static FullGameView of(IGameStateModel model) {
 
+        Objects.requireNonNull(model);
+
         return new FullGameView(
                 model.getGameId(),
                 model.getPlayerCards(),
