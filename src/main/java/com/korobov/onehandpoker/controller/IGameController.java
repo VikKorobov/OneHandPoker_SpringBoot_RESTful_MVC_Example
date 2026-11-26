@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.korobov.onehandpoker.controller.requests.PlayRequest;
 import com.korobov.onehandpoker.controller.views.FullGameView;
+import com.korobov.onehandpoker.controller.views.PlayerView;
 import com.korobov.onehandpoker.controller.views.QuickGameView;
 import com.korobov.onehandpoker.controller.views.StatsView;
 
@@ -31,7 +32,7 @@ public interface IGameController {
     ResponseEntity<StatsView> getStats();
 
     @GetMapping("stats/player/{id}")
-    ResponseEntity<FullGameView> getPlayerStats(@PathVariable Long id);
+    ResponseEntity<PlayerView> getPlayerStats(@PathVariable Long id);
 
     //NOTE: The following two endpoints will serve static markdown files that are stored in the resources folder. 
     @GetMapping(value = "info/rules", produces = "text/markdown")
