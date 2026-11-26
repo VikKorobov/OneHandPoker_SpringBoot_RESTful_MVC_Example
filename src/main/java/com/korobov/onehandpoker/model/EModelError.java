@@ -1,5 +1,7 @@
 package com.korobov.onehandpoker.model;
 
+import java.util.Objects;
+
 import com.korobov.onehandpoker.utilities.EErrorCode;
 import com.korobov.onehandpoker.utilities.IError;
 
@@ -12,8 +14,8 @@ public enum EModelError implements IError {
 
     EModelError(EErrorCode code, String message) {
 
-        this.code = code;
-        this.message = message;
+        this.code = Objects.requireNonNull(code);
+        this.message = Objects.requireNonNull(message);
     }
 
     @Override
