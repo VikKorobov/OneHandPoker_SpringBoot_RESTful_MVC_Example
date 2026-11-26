@@ -5,12 +5,12 @@ import java.util.Objects;
 
 import com.korobov.onehandpoker.model.IGameStateModel;
 import com.korobov.onehandpoker.model.components.CardRecord;
-import com.korobov.onehandpoker.model.components.EGameState;
+import com.korobov.onehandpoker.model.components.EGameResult;
 
 public record FullGameView(
         Long gameId,
         Iterable<CardRecord> playerCards,
-        EGameState gameState,
+        EGameResult gameState,
         BigDecimal playerBet,
         BigDecimal winMultiplier,
         BigDecimal playerWinnings

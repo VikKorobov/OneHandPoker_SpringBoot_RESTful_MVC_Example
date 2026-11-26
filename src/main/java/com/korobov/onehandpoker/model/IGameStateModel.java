@@ -3,7 +3,7 @@ package com.korobov.onehandpoker.model;
 import java.math.BigDecimal;
 
 import com.korobov.onehandpoker.model.components.CardRecord;
-import com.korobov.onehandpoker.model.components.EGameState;
+import com.korobov.onehandpoker.model.components.EGameResult;
 
 public interface IGameStateModel {
 
@@ -13,7 +13,7 @@ public interface IGameStateModel {
     
     Iterable<CardRecord> getPlayerCards();
 
-    EGameState getGameState();
+    EGameResult getGameState();
 
     BigDecimal getPlayerBet();
 
