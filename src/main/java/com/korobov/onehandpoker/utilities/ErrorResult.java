@@ -3,16 +3,18 @@ package com.korobov.onehandpoker.utilities;
 import java.util.Objects;
 
 /**
- * Represents the result of an operation that may fail, with optional error
- * data.
- * 
+ * Represents the result of an operation that can succeed or fail
+ * without producing success data.
+ *
  * <p>
- * This class encapsulates a success or failure state and includes the
- * associated error information when applicable.
+ * A successful result contains no data, whereas a failed result
+ * contains non-null failure data.
  * </p>
- * 
- * @param <FailureType> the type of error data associated with failure.
- * 
+ *
+ * @param <FailureType> the type of data associated with failure.
+ *
+ * @see Result
+ *
  * @author Korobov Viktor
  * @version 1.0
  */
@@ -28,9 +30,9 @@ public class ErrorResult<FailureType> {
     }
 
     /**
-     * Creates a successful {@code ErrorResult} instance with no error data.
-     * 
-     * @param <F> the type of error data (unused for success).
+     * Creates a successful {@code ErrorResult} instance without associated data.
+     *
+     * @param <F> the type of failure data.
      * @return a successful {@code ErrorResult}.
      */
     public static <F> ErrorResult<F> success() {
@@ -39,11 +41,11 @@ public class ErrorResult<FailureType> {
     }
 
     /**
-     * Creates a failed {@code ErrorResult} instance with the specified error data.
-     * 
-     * @param <F>   the type of error data.
-     * @param error the error data associated with the failure.
-     * @return a failed {@code ErrorResult}.
+     * Creates a failed {@code ErrorResult} instance with the specified failure data.
+     *
+     * @param <F> the type of failure data.
+     * @param error the failure data.
+     * @return a failed {@code ErrorResult} containing the specified failure data.
      * @throws NullPointerException if {@code error} is {@code null}.
      */
     public static <F> ErrorResult<F> failure(F error) {
@@ -52,9 +54,9 @@ public class ErrorResult<FailureType> {
     }
 
     /**
-     * Checks if the result represents a success.
-     * 
-     * @return {@code true} if the result is a success, {@code false} otherwise.
+     * Checks whether the result represents a success.
+     *
+     * @return {@code true} if the result represents a success, {@code false} otherwise.
      */
     public boolean isSuccess() {
 
@@ -62,9 +64,9 @@ public class ErrorResult<FailureType> {
     }
 
     /**
-     * Checks if the result represents a failure.
-     * 
-     * @return {@code true} if the result is a failure, {@code false} otherwise.
+     * Checks whether the result represents a failure.
+     *
+     * @return {@code true} if the result represents a failure, {@code false} otherwise.
      */
     public boolean isFailure() {
 
@@ -72,10 +74,12 @@ public class ErrorResult<FailureType> {
     }
 
     /**
-     * Retrieves the failure data, if any.
+     * Retrieves the failure data associated with the result.
+     *
+     * @return the failure data if the result represents a failure, {@code null} otherwise.
      */
     public FailureType getFailureData() {
-        
+
         return failureData;
     }
 }
