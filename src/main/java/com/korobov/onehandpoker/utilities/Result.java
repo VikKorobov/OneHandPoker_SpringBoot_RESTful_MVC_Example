@@ -69,15 +69,8 @@ public class Result<SuccessType, FailureType> {
      * @param <F>         the type of failure data.
      * @param errorResult the failed {@code ErrorResult} containing the error data.
      * @return a failed {@code Result} containing the original error data.
-     * @throws IllegalArgumentException if {@code errorResult} represents a success.
-     * @throws NullPointerException if {@code errorResult} is {@code null}.
      */
     public static <S, F> Result<S, F> failure(ErrorResult<? extends F> errorResult) {
-
-        if (errorResult.isSuccess()) {
-
-            throw new IllegalArgumentException("The provided ErrorResult represents a success.");
-        }
 
         return Result.failure(errorResult.getFailureData());
     }
