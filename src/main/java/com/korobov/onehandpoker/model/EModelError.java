@@ -5,6 +5,13 @@ import java.util.Objects;
 import com.korobov.onehandpoker.utilities.EErrorCode;
 import com.korobov.onehandpoker.utilities.IError;
 
+/**
+ * Defines errors related to invalid game model data.
+ * 
+ * @see IGameStateModel
+ * @see EErrorCode
+ * @see IError
+ */
 public enum EModelError implements IError {
 
     ;

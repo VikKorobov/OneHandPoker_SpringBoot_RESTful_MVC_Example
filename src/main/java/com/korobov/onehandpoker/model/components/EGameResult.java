@@ -1,5 +1,12 @@
 package com.korobov.onehandpoker.model.components;
 
+import com.korobov.onehandpoker.model.IGameStateModel;
+
+/**
+ * Defines the possible poker hand evaluation results.
+ * 
+ * @see IGameStateModel
+ */
 public enum EGameResult {
     ROYAL_FLUSH,
     STRAIGHT_FLUSH,

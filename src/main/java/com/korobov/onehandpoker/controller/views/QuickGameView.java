@@ -6,6 +6,14 @@ import java.util.Objects;
 import com.korobov.onehandpoker.model.IGameStateModel;
 import com.korobov.onehandpoker.model.components.CardRecord;
 
+/**
+ * Represents a simplified view of a persisted game.
+ *
+ * @param gameId the game ID.
+ * @param playerCards the dealt cards.
+ * @param playerBet the amount wagered.
+ * @param playerWinnings the gross payout.
+ */
 public record QuickGameView(
         Long gameId,
         Iterable<CardRecord> playerCards,
@@ -13,6 +21,11 @@ public record QuickGameView(
         BigDecimal playerWinnings
 ) {
 
+    /**
+     * Creates a game view.
+     *
+     * @throws NullPointerException if any component is null.
+     */
     public QuickGameView {
 
         Objects.requireNonNull(gameId);
@@ -21,6 +34,13 @@ public record QuickGameView(
         Objects.requireNonNull(playerWinnings);
     }
 
+    /**
+     * Creates a simplified view of a persisted game.
+     *
+     * @param model the persisted game model.
+     * @return the game view.
+     * @throws NullPointerException if the model or a required property is null.
+     */
     public static QuickGameView of(IGameStateModel model) {
 
         Objects.requireNonNull(model);

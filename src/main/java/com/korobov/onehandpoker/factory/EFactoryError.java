@@ -5,6 +5,13 @@ import java.util.Objects;
 import com.korobov.onehandpoker.utilities.EErrorCode;
 import com.korobov.onehandpoker.utilities.IError;
 
+/**
+ * Defines errors related to game model construction.
+ * 
+ * @see IGameStateFactory
+ * @see EErrorCode
+ * @see IError
+ */
 public enum EFactoryError implements IError {
 
     ;

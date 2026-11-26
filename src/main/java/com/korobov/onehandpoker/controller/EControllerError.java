@@ -5,6 +5,13 @@ import java.util.Objects;
 import com.korobov.onehandpoker.utilities.EErrorCode;
 import com.korobov.onehandpoker.utilities.IError;
 
+/**
+ * Defines errors related to request handling and response generation.
+ * 
+ * @see IGameController
+ * @see EErrorCode
+ * @see IError
+ */
 public enum EControllerError implements IError {
 
     ;
