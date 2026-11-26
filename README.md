@@ -655,34 +655,22 @@ simulated during development and integration testing.
 
 ### Source Code Documentation - *JavaDoc*
 
-*JavaDoc* is the standard documentation mechanism provided by *Java* for describing classes, interfaces, records, enumerations, constructors, and methods.
+JavaDoc is the standard documentation mechanism provided by Java for describing source code and its intended behavior.
 
-In this project, *JavaDoc* serves not only as source code documentation but also as a means of describing the architectural skeleton and its intended behavior.
+Well-written code should generally be self-explanatory and ideally require no additional documentation.
 
-The project skeleton defines architectural components and their contracts before providing their concrete implementations.
+However, given the educational nature of this project, *JavaDoc* is used to document the architectural skeleton 
+and communicate its design, responsibilities, contracts, and intentions more explicitly.
 
-The documentation describes:
-
-- The responsibilities of individual architectural components.
-- The intended behavior of interfaces and methods.
-- Expected input parameters and return values.
-- Preconditions, invariants, and constraints.
-- Expected error handling behavior.
-- The separation of responsibilities between architectural layers.
-
-This allows developers to understand what a component is expected to accomplish without prescribing how its internal implementation must be realized.
-
-Unnecessary duplication of documentation and comments describing self-explanatory code should be avoided.
+The use of JavaDoc is therefore limited to contract definition. Beyond this point, meaningful naming, clear code structure, 
+and readable implementations take precedence over additional documentation.
 
 #### Educational Purpose
 
 Students learn how to:
 
 - Define architectural contracts before implementing concrete functionality.
-- Separate component responsibilities from implementation details.
 - Understand an existing project skeleton through its documentation.
-- Implement components according to predefined contracts.
-- Maintain consistent and meaningful source code documentation.
 - Use documentation as a communication mechanism between developers.
 
 *JavaDoc* complements the architectural principles of this project by making the intended design explicit and understandable.
